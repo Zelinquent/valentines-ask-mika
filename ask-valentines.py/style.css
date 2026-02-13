@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: #ffe6f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Press Start 2P', cursive;
+    overflow: hidden;  /* VERY IMPORTANT */
+}
+
+
+/* Envelope */
+
+.envelope {
+    position: relative;
+    width: 400px;
+    height: 250px;
+    background: #ff4d6d;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+
+
+.flap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #d6336c;
+    clip-path: polygon(0 0, 50% 60%, 100% 0);
+    transform-origin: top;
+    transition: transform 0.6s;
+}
+
+.letter {
+    position: absolute;
+    width: 100%;
+    height: 100%;      /* keep same as envelope */
+    background: #ffccd5;
+    left: 0;
+    top: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: left;       /* easier to read long letters */
+    transform: translateY(100%);   /* hidden inside envelope */
+    transition: transform 0.6s ease;
+    overflow-y: auto;       /* enable vertical scroll */
+}
+
+.letter::-webkit-scrollbar {
+    width: 6px;
+}
+
+.letter::-webkit-scrollbar-thumb {
+    background-color: #c9184a;
+    border-radius: 3px;
+}
+
+
+.full-letter {
+    position: fixed;
+    top: -100%;             /* start off-screen */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 600px;
+    background: #ffccd5;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: left;
+    font-size: 12px;
+    line-height: 1.6;
+    border: 3px solid #ff4d6d;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    overflow-y: auto;
+    max-height: 90vh;
+    z-index: 1000;
+    transition: top 1s ease-out;
+}
+
+
+.buttons {
+    position: relative;
+}
+
+
+.envelope.open .flap {
+    transform: rotateX(180deg);
+}
+
+.envelope.open .letter {
+    transform: translateY(0%);  /* slides out further for taller letter */
+}
+
+
+
+
+h1 {
+    font-size: 14px;
+    color: #ff4d6d;
+    margin-bottom: 20px;
+}
+
+button {
+    font-family: 'Press Start 2P', cursive;
+    padding: 12px;
+    font-size: 10px;
+    margin: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+#yesBtn {
+    background: #ff4d6d;
+    color: white;
+}
+
+#noBtn {
+    background: #999;
+    color: white;
+}
+
+/* Minecraft Flower */
+
+.pixel-flower {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    animation: floatUp 5s linear infinite;
+}
+
+.pixel-flower::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background:
+        linear-gradient(red 0 0) 6px 0/8px 8px,
+        linear-gradient(red 0 0) 0 6px/8px 8px,
+        linear-gradient(red 0 0) 12px 6px/8px 8px,
+        linear-gradient(red 0 0) 6px 12px/8px 8px,
+        linear-gradient(yellow 0 0) 6px 6px/8px 8px;
+    background-repeat: no-repeat;
+}
+
+.pixel-flower::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 12px;
+    background: green;
+    left: 8px;
+    top: 20px;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-800px); opacity: 0; }
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.pixel-balloon {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    animation: floatBalloon 6s linear forwards;
+}
+
+/* Pixel Heart Shape */
+.pixel-balloon::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background:
+        linear-gradient(#ff4d6d 0 0) 6px 0/8px 8px,
+        linear-gradient(#ff4d6d 0 0) 0 6px/8px 8px,
+        linear-gradient(#ff4d6d 0 0) 12px 6px/8px 8px,
+        linear-gradient(#ff4d6d 0 0) 6px 12px/8px 8px;
+    background-repeat: no-repeat;
+}
+
+/* Pixel String */
+.pixel-balloon::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    background: #555;
+    left: 9px;
+    top: 20px;
+}
+
+@keyframes floatBalloon {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-800px);
+        opacity: 0;
+    }
+}
